@@ -4,8 +4,8 @@ import { useActor } from "@xstate/react";
 import { BlackStone } from './BlackStone.jsx'
 import { WhiteStone } from './WhiteStone.jsx'
 
-import { goMachineService } from './goMachine.js'
-import { GoContext } from './GoExperience.jsx'
+
+import { AppContext } from '../App.jsx'
 
 function Space( props )
 {
@@ -23,13 +23,13 @@ export function Spaces()
   console.log('instantiating spaces')
 
 
-  const goServices = useContext(GoContext)
-  console.log(goServices)
+  const appServices = useContext(AppContext)
+  console.log(appServices)
 
-  const [ state, send, localservice ] = useActor(goServices.goMachineService)
+  const [ state, send, localservice ] = useActor(appServices.appMachineService)
   console.log(state)
 
-  goServices.goMachineService.subscribe(state => console.log(state))
+  appServices.appMachineService.subscribe(state => console.log(state))
 
 
   const clickFunc = (e) => send({ 
@@ -39,7 +39,7 @@ export function Spaces()
             } )
 
   return <group>
-    {state.context.board.map((type, index) => {
+    {state.context.boardstate.map((type, index) => {
         const xSpaceSize = 0.17 / 9
         const xpos = xSpaceSize * ( index % 19 - 9 )
         const ypos = xSpaceSize * ( Math.floor( index / 19 ) - 9 ) 

@@ -1,8 +1,9 @@
 import React, { useState, useRef, createContext, useContext } from 'react'
-import "./style.css"
+import "./App.css"
 import { Canvas } from '@react-three/fiber'
-import Experience from './fruitexp/Experience.jsx'
+import {GoExperience} from './go/GoExperience.jsx'
 import { Headsup } from './components/Headsup.jsx'
+
 import {Auth, cookies, SignOut} from './components/Auth.jsx'
 import { Chat } from './components/Chat.jsx'
 // import { SignOut } from './components/SignOut.jsx'
@@ -23,13 +24,13 @@ export function App() {
       <Canvas
         shadows
         camera={ {
-            fov: 45,
-            near: 0.1,
-            far: 200000,
-            position: [ 2.5, 4, 6 ]
+          fov: 45,
+          near: 0.1,
+          far: 200,
+          position: [ 0, 0.5, 1 ]
         } }
       >
-        <Experience />
+        <GoExperience />
       </Canvas>
 
       <div className="overlay">

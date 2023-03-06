@@ -12,34 +12,35 @@ export const Chat = (props) =>
 
   const messagesRef = collection(db, "messages")
 
-  useEffect(() => {
-    const queryMessages = query(
-      messagesRef, 
-      where("room", "==", room),
-      orderBy("createdAt")
-    )
+  // useEffect(() => {
+  //   const queryMessages = query(
+  //     messagesRef, 
+  //     where("room", "==", room),
+  //     orderBy("createdAt")
+  //   )
     
-    const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
-      let messages = []
-      snapshot.forEach((doc) => {
-        messages.push({...doc.data(), id: doc.id })
-      })
-      setMessages(messages)
-    })
-    return () => unsubscribe()
-  }, [])
+  //   const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
+  //     let messages = []
+  //     snapshot.forEach((doc) => {
+  //       messages.push({...doc.data(), id: doc.id })
+  //     })
+  //     setMessages(messages)
+  //   })
+  //   return () => unsubscribe()
+  // }, [])
 
   const handleSubmit = async (e) => 
   {
     e.preventDefault()
     if ( newMessage === "") return
-    await addDoc(messagesRef, {
+      await addDoc(messagesRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
       user: auth.currentUser.displayName,
       room: room,
     })
     setNewMessage("")
+    console.log('ATM', result)
   }
 
   return <div className="chat-app">
@@ -47,7 +48,7 @@ export const Chat = (props) =>
     <div className="messages">
       {messages.map((message) => (
       <div className="message" key={message.id} >
-        <span lassName="user">{message.user}</span>
+        <span className="user">{message.user}</span>
         {message.text}
       </div>
       ))}

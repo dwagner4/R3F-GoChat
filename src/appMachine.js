@@ -51,24 +51,29 @@ const logic = {
   id: 'gogame',
   initial: 'gameform',
   context: {
-    board: initalBoard,
-    turn: 'b',
-    you: 'frances'
+    gameid: '',
+    turn: 0,
+    boardstate: initalBoard,
+    ko: [],
+    blackdead: 0,
+    whitedead: 0,
+    handicapp: 0,
+    history: [],
   },
   states: {
     gameform: {
       on: {
         SUBMIT: {
-          target: 'gamesubmitted'
+          target: 'gamenego'
         }
       }
     },
-    gamesubmitted:{
+    gamenego:{
       on: {
         COMPLETE: {
           target: 'gameplay'
         },
-        INCOMPLETE: {
+        DELETE: {
           target: 'gameform'
         }
       }
