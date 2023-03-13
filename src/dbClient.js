@@ -1,39 +1,32 @@
+import { useActor } from "@xstate/react";
+
 import { auth, provider, db } from './firebase-config.js'
 import { addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy } from 'firebase/firestore'
-
- // useEffect(() => {
-  //   const queryMessages = query(
-  //     messagesRef, 
-  //     where("room", "==", room),
-  //     orderBy("createdAt")
-  //   )
-    
-  //   const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
-  //     let messages = []
-  //     snapshot.forEach((doc) => {
-  //       messages.push({...doc.data(), id: doc.id })
-  //     })
-  //     setMessages(messages)
-  //   })
-  //   return () => unsubscribe()
-  // }, [])
+import { appMachineService } from './appMachine.js'
 
 
 
-  // const handleSubmit = async (e) => 
-  // {
-  //   e.preventDefault()
-  //   if ( newName === "") return
-  //   const result = await addDoc(messagesRef, {
-  //     name: newName,
-  //     createdAt: serverTimestamp(),
-  //     room: "fuck you",
-  //   })
-  //   setNewName("")
-  //   console.log("fuck you", result)
-  // }
+ 
+
+  
+// const [ state, send, raise, localservice ] = useActor(appMachineService)
 
  const messagesRef = collection(db, "GoGames")
+
+ const queryMessages = query(
+  messagesRef, 
+  // where("room", "==", room),
+  // orderBy("createdAt")
+)
+
+const unsubscribe = onSnapshot(queryMessages, (snapshot) => {
+  let messages = []
+  snapshot.forEach((doc) => {
+    messages.push({...doc.data(), id: doc.id })
+  })
+  console.log(messages)
+  appMachineService.send({ type: 'DATA_UPDATE' })
+})
 
 export const gameWrite = async (e) => 
 {
@@ -44,6 +37,7 @@ export const gameWrite = async (e) =>
         createdAt: serverTimestamp(),
         room: "fuck you",
       })
+  console.log("fuck you", result)
 }
 
 export const chatWrite = (c) => 

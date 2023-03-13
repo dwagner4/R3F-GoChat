@@ -61,6 +61,11 @@ const logic = {
     handicapp: 0,
     history: [],
   },
+  on: { 
+    DATA_UPDATE: {
+      actions: [ 'dataupdate' ]
+    }
+  },
   states: {
     gameform: {
       on: {
@@ -115,6 +120,9 @@ const functions = {
     },
     gamewrite: ( context, event ) => { 
       gameWrite(event)
+    },
+    dataupdate: ( context, event ) => {
+      console.log("Fuck the data")
     },
     // updateBoard: assign( { you: 'dean' } )
     // updateBoard: assign( () => {return { you: 'dean' } })
