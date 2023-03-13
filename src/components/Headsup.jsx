@@ -1,16 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useActor } from "@xstate/react";
-import { db } from '../firebase-config'
-import { addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy } from 'firebase/firestore'
+
+// import { db } from '../firebase-config'
+// import { addDoc, collection, serverTimestamp, onSnapshot, query, where, orderBy } from 'firebase/firestore'
 
 import { AppContext } from '../App.jsx'
 import '../styles/Chat.css'
 
 const GameForm = () => 
 {
-  const [ newName, setNewName ] = useState('')
+  const [ newName, setNewName ] = useState('frank')
 
-  const messagesRef = collection(db, "GoGames")
+  // const messagesRef = collection(db, "GoGames")
+
+  const appServices = useContext(AppContext)
+  const [ state, send, raise, localservice ] = useActor(appServices.appMachineService)
 
 
   // useEffect(() => {
@@ -32,23 +36,30 @@ const GameForm = () =>
 
 
 
-  const handleSubmit = async (e) => 
+  // const handleSubmit = async (e) => 
+  // {
+  //   e.preventDefault()
+  //   if ( newName === "") return
+  //   const result = await addDoc(messagesRef, {
+  //     name: newName,
+  //     createdAt: serverTimestamp(),
+  //     room: "fuck you",
+  //   })
+  //   setNewName("")
+  //   console.log("fuck you", result)
+  // }
+
+  const handleSubmit = (e) =>
   {
     e.preventDefault()
-    if ( newName === "") return
-    const result = await addDoc(messagesRef, {
-      name: newName,
-      createdAt: serverTimestamp(),
-      room: "fuck you",
-    })
-    setNewName("")
-    console.log("fuck you", result)
+    console.log(e)
+    send({type: 'HAS_GAME_ID', newname: newName})
   }
 
   return (
     <div>
       <h2>GameForm, {newName} </h2>
-      <form onSubmit={handleSubmit} className="new-message-form">
+      {/* <form onSubmit={handleSubmit} className="new-message-form"> */}
         <input 
           className="new-message-input" 
           placeholder="Type your name here..."
@@ -64,10 +75,11 @@ const GameForm = () =>
           <input type="radio" id="dewey" name="drone" value="dewey" />
           <label for="dewey">White</label>
         </div>
-        <button type="submit" className="send-button"> Start </button>
+        {/* <button type="submit" className="send-button"> Start </button> */}
+        <button onClick={handleSubmit} className="send-button"> Start </button>
 
         
-      </form>
+      {/* </form> */}
     </div>
   )
 }

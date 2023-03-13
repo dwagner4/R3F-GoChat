@@ -24,12 +24,11 @@ export function Spaces()
 
 
   const appServices = useContext(AppContext)
-  console.log(appServices)
+  // console.log(appServices)
 
   const [ state, send, localservice ] = useActor(appServices.appMachineService)
-  console.log(state)
 
-  appServices.appMachineService.subscribe(state => console.log(state))
+  // appServices.appMachineService.subscribe(state => console.log(state))
 
 
   const clickFunc = (e) => send({ 

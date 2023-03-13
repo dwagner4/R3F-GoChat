@@ -1,4 +1,5 @@
 import { createMachine, interpret, assign } from 'xstate';
+import { gameWrite, chatWrite } from './dbClient.js'
 
 const initalBoard = [ 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 
                       'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 
@@ -64,7 +65,12 @@ const logic = {
     gameform: {
       on: {
         SUBMIT: {
-          target: 'gamenego'
+          target: '',
+          actions: [ 'submitSpace' ]
+        },
+        HAS_GAME_ID: {
+          target: 'gamenego',
+          actions: [ 'gamewrite' ]
         }
       }
     },
@@ -106,6 +112,9 @@ const functions = {
   {
     submitSpace: ( context, event ) => { 
       console.log( 'submit event', event ) 
+    },
+    gamewrite: ( context, event ) => { 
+      gameWrite(event)
     },
     // updateBoard: assign( { you: 'dean' } )
     // updateBoard: assign( () => {return { you: 'dean' } })
