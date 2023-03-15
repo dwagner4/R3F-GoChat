@@ -52,14 +52,17 @@ const logic = {
   id: 'gogame',
   initial: 'gameform',
   context: {
-    gameid: '',
+    user: null,
+    gameid: null,
     turn: 0,
     boardstate: initalBoard,
-    ko: [],
+    ko: [],          // ints
     blackdead: 0,
     whitedead: 0,
     handicapp: 0,
-    history: [],
+    history: [],     // {index, color, turnInt}
+    players: [],     //[ { name, color, accepts }, ... ]
+    chat: []         // {id, timestamp, text}
   },
   on: { 
     DATA_UPDATE: {
