@@ -50,7 +50,7 @@ const turnlogic = {
 const logic = {
   predictableActionArguments: true,
   id: 'gogame',
-  initial: 'gameform',
+  initial: 'auth',
   context: {
     user: null,
     gameid: null,
@@ -70,6 +70,16 @@ const logic = {
     }
   },
   states: {
+    auth: {
+      on: {
+        LOGIN: {
+          target: 'gameform'
+        },
+        LOGIN_ERROR: {
+          actions: [ () => alert("WTF, Login Error") ]
+        }
+      }
+    },
     gameform: {
       on: {
         SUBMIT: {

@@ -35,7 +35,6 @@ export function App() {
 
       <div className="overlay">
         <Headsup />
-        
       </div>
     </AppContext.Provider>
   )

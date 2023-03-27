@@ -33,12 +33,13 @@ export const Chat = (props) =>
   {
     e.preventDefault()
     if ( newMessage === "") return
-      await addDoc(messagesRef, {
+    await addDoc(messagesRef, {
       text: newMessage,
       createdAt: serverTimestamp(),
       user: auth.currentUser.displayName,
       room: room,
     })
+    // TODO add error logic
     setNewMessage("")
     console.log('ATM', result)
   }
