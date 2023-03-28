@@ -103,7 +103,7 @@ export const Headsup = () =>
   return (
     <div>
       <h1>Yoho {state.value}</h1>
-      { state.matches('auth') ? <Auth /> : null }
+      {/* { state.matches('auth') ? <Auth /> : null } */}
       { state.matches('gameform') ? <GameForm /> : null }
       { state.matches('gamesubmitted') ? <GameSubmitted /> : null }
       { state.matches('gameplay') ? <GamePlay /> : null }

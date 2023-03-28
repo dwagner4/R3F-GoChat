@@ -4,9 +4,8 @@ import { Canvas } from '@react-three/fiber'
 import {GoExperience} from './go/GoExperience.jsx'
 import { Headsup } from './components/Headsup.jsx'
 
-import {Auth, cookies, SignOut} from './components/Auth.jsx'
+import {Auth, cookies} from './components/Auth.jsx'
 import { Chat } from './components/Chat.jsx'
-// import { SignOut } from './components/SignOut.jsx'
 
 import { appMachineService } from './appMachine.js'
 
@@ -35,6 +34,7 @@ export function App() {
 
       <div className="overlay">
         <Headsup />
+        <Auth />
       </div>
     </AppContext.Provider>
   )

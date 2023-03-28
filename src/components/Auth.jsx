@@ -29,20 +29,10 @@ export const Auth = (props) =>
       console.log(err)
       send({type: 'LOGIN_ERROR'})
     }
-    
   }
 
-  return <div className="auth">
-    <p> Sign in with google to continue </p>
-    <button onClick={signInWithGoogle}>Sign in with google</button>
-  </div>
-}
-
-export const SignOut = (props) => 
-{
-  const { setIsAuth } = props
-
-  const signUserOut = async () => {
+  const signUserOut = async () => 
+  {
     await signOut(auth)
     cookies.remove("auth-token")
     send({type: 'LOGOUT'})
@@ -50,8 +40,11 @@ export const SignOut = (props) =>
     // setRoom(null)
   } 
 
-  return (
-    <div><button onClick={signUserOut} > Sign Out </button></div>
-  )
-
+  return <div className="auth">
+    {
+      state.matches('auth') ? <button onClick={signInWithGoogle}>Sign in with google</button> : <button onClick={signUserOut} > Sign Out </button>
+    }
+    
+  </div>
 }
+
