@@ -67,6 +67,9 @@ const logic = {
   on: { 
     DATA_UPDATE: {
       actions: [ 'dataupdate' ]
+    },
+    LOGOUT: {
+      target: 'auth'
     }
   },
   states: {

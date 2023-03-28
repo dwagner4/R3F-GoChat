@@ -45,6 +45,7 @@ export const SignOut = (props) =>
   const signUserOut = async () => {
     await signOut(auth)
     cookies.remove("auth-token")
+    send({type: 'LOGOUT'})
     // setIsAuth(false)
     // setRoom(null)
   } 
