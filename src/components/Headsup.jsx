@@ -6,7 +6,7 @@ import { useActor } from "@xstate/react";
 
 import { AppContext } from '../App.jsx'
 import '../styles/Chat.css'
-import { Auth } from './Auth.jsx';
+import { Auth } from './auth/Auth.jsx';
 
 const GameForm = () => 
 {
@@ -102,8 +102,8 @@ export const Headsup = () =>
 
   return (
     <div>
-      <h1>Yoho {state.value}</h1>
-      {/* { state.matches('auth') ? <Auth /> : null } */}
+      {/* <h1>Yoho {state.value}</h1> */}
+      <Auth />
       { state.matches('gameform') ? <GameForm /> : null }
       { state.matches('gamesubmitted') ? <GameSubmitted /> : null }
       { state.matches('gameplay') ? <GamePlay /> : null }

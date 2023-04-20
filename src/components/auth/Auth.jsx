@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useActor } from "@xstate/react";
 
-import { auth, provider } from '../firebase-config.js'
+import { auth, provider } from '../../firebase-config.js'
 import { signInWithPopup } from "firebase/auth"
 import {signOut } from "firebase/auth"
 
-import { AppContext } from '../App.jsx'
+import { AppContext } from '../../App.jsx'
 import Cookies from 'universal-cookie'
 export const cookies = new Cookies()
-import '../styles/Auth.css'
+
+import { SignIn } from "./SignIn.jsx"
+import { SignOut } from "./SignOut.jsx"
 
 export const Auth = (props) => 
 {
@@ -42,9 +44,8 @@ export const Auth = (props) =>
 
   return <div className="auth">
     {
-      state.matches('auth') ? <button onClick={signInWithGoogle}>Sign in with google</button> : <button onClick={signUserOut} > Sign Out </button>
+      state.matches('logged_in') ? <SignIn dosignin={ signInWithGoogle }/> : <SignOut dosignout={signUserOut}/>
     }
-    
   </div>
 }
 

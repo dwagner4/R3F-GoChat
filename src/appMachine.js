@@ -50,7 +50,7 @@ const turnlogic = {
 const logic = {
   predictableActionArguments: true,
   id: 'gogame',
-  initial: 'auth',
+  initial: 'logged_in',
   context: {
     user: null,
     gameid: null,
@@ -62,18 +62,19 @@ const logic = {
     handicapp: 0,
     history: [],     // {index, color, turnInt}
     players: [],     //[ { name, color, accepts }, ... ]
-    chat: []         // {id, timestamp, text}
+    chat: [],        // {id, timestamp, text},
+    authMsg: 'authmsg'
   },
   on: { 
     DATA_UPDATE: {
       actions: [ 'dataupdate' ]
     },
     LOGOUT: {
-      target: 'auth'
+      target: 'logged_in'
     }
   },
   states: {
-    auth: {
+    logged_in: {
       on: {
         LOGIN: {
           target: 'gameform'
